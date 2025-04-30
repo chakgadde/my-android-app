@@ -15,7 +15,9 @@ jobs:
 
       - name: Use Buildozer Docker image
         run: |
-          docker run --rm \ -v ${{ github.workspace }}:/home/user/app \ -w /home/user/app
+          docker run --rm \ 
+          -v ${{ github.workspace }}:/home/user/app \ 
+          -w /home/user/app
             ghcr.io/kivy/buildozer:latest \
             buildozer -v android debug"
 
