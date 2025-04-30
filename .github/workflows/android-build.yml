@@ -16,7 +16,7 @@ jobs:
       - name: Use Buildozer Docker image
         run: |
           docker run --rm -v ${{ github.workspace }}:/app \
-            kivy/buildozer:python3 \
+            ghcr.io/kivy/buildozer:latest \
             bash -c "cd /app && buildozer -v android debug"
 
       - name: Upload APK
