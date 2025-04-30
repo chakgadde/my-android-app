@@ -6,6 +6,7 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
 requirements = python3,kivy
+android.build_tools_version = 33.0.2
 orientation = portrait
 osx.python_version = 3
 fullscreen = 1
