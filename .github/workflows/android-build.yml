@@ -7,29 +7,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      ANDROID_SDK_ROOT: /opt/android-sdk
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up environment
+      - name: Use Buildozer Docker image
         run: |
-          sudo apt update
-          sudo apt install -y zip unzip openjdk-11-jdk python3-pip
-          pip install buildozer cython==0.29.33
-
-      - name: Build APK
-        run: |
-          mkdir -p $ANDROID_SDK_ROOT/build-tools
-          cd $ANDROID_SDK_ROOT/build-tools
-          curl -o build-tools.zip https://dl.google.com/android/repository/build-tools_r33.0.2-linux.zip
-          unzip -q build-tools.zip
-          rm build-tools.zip
-          export PATH=$ANDROID_SDK_ROOT/build-tools/33.0.2:$PATH
-          cd $GITHUB_WORKSPACE
-          buildozer -v android debug
+          docker run --rm -v ${{ github.workspace }}:/app \
+            kivy/buildozer \
+            bash -c "cd /app && buildozer -v android debug"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
