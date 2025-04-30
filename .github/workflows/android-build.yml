@@ -14,12 +14,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Use Buildozer Docker image
-        run: |
-          docker run --rm \ 
-          -v ${{ github.workspace }}:/home/user/app \ 
-          -w /home/user/app
-            ghcr.io/kivy/buildozer:latest \
-            buildozer -v android debug"
+run: |
+docker run --rm \
+-v ${{ github.workspace }}:/home/user/app \
+-w /home/user/app \
+ghcr.io/kivy/buildozer:latest \
+buildozer -v android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
